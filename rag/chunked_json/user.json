@@ -1,0 +1,33 @@
+[
+  {
+    "id": "user_e2a6e75d_0",
+    "title": "Tuyển sinh 2025 - Đăng nhập | Thông tin tuyển sinh Đại học",
+    "content": "_Nguồn: [https://tuyensinh.uit.edu.vn/user](https://tuyensinh.uit.edu.vn/user)_\n\n[! [](images\\banner_2025.png)](/ \"Nhà\")\n\n**Nếu bạn chưa có tài khoản? [Nhấn vào đây](/dangky-thongtin)**\n\nCCCD hoặc CMND \\*\n\nMật khẩu \\*\n\nCAPTCHA\n\nThis question is for testing whether or not you are a human visitor and to prevent automated spam submissions. **Quên mật khẩu? [Nhấn vào đây](/user/password)**",
+    "source_file": "user.md",
+    "source_url": "https://tuyensinh.uit.edu.vn/user",
+    "metadata": {
+      "year": "2025",
+      "field": "tuyen_sinh",
+      "chunk_index": 0,
+      "section_index": 0,
+      "token_count": 47,
+      "original_title": "Đăng nhập | Thông tin tuyển sinh Đại học"
+    }
+  },
+  {
+    "id": "user_11ec64f6_0",
+    "title": "Tuyển sinh 2025 - Đăng nhập | Thông tin tuyển sinh Đại học",
+    "content": "Images Downloaded\n\n- `images\\banner_2025.png` (từ https://tuyensinh.uit.edu.vn/sites/default/files/banner_2025.png)",
+    "source_file": "user.md",
+    "source_url": "",
+    "metadata": {
+      "year": "2025",
+      "field": "tuyen_sinh",
+      "chunk_index": 0,
+      "section_index": 1,
+      "token_count": 6,
+      "original_title": "Đăng nhập | Thông tin tuyển sinh Đại học",
+      "section_title": "Images Downloaded"
+    }
+  }
+]
