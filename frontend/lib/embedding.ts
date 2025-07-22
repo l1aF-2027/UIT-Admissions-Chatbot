@@ -27,13 +27,11 @@ export async function embedQuery(query: string): Promise<number[]> {
     });
 
     // If response is an array of arrays, take the first one
-    if (Array.isArray(response) && Array.isArray(response[0])) {
-      return response[0];
-    }
-
-    // If response is a single array
     if (Array.isArray(response)) {
-      return response;
+      if (Array.isArray(response[0])) {
+        return response[0] as number[];
+      }
+      return response as number[];
     }
 
     throw new Error("Unexpected embedding response format");
