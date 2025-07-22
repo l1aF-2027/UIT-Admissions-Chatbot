@@ -16,3 +16,5 @@ qdrant-client==1.8.1
 
 # Optional: For better compatibility with pathlib if needed
 pathlib==1.0.1; python_version < '3.4'
+
+pytest
