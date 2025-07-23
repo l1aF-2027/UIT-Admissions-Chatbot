@@ -2,7 +2,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { HfInference } from "@huggingface/inference";
 
-const hf = new HfInference(process.env.NEXT_PUBLIC_HUGGING_FACE_API_KEY);
 console.log("Environment check:");
 console.log(
   "HUGGINGFACE_API_KEY exists:",
@@ -12,6 +11,7 @@ console.log(
   "All HF env vars:",
   Object.keys(process.env).filter((key) => key.includes("HUG"))
 );
+const hf = new HfInference(process.env.NEXT_PUBLIC_HUGGING_FACE_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
