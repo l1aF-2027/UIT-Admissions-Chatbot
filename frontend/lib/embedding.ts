@@ -1,42 +1,53 @@
-import { HfInference } from "@huggingface/inference";
-
-const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
-
+// Sửa lại để gọi qua API route thay vì trực tiếp HF API
 export async function embedQuery(query: string): Promise<number[]> {
   try {
-    // For development/testing, return a mock embedding
-    if (
-      process.env.NODE_ENV === "development" &&
-      !process.env.HUGGINGFACE_API_KEY
-    ) {
-      console.log("Using mock embedding for development");
+    console.log(
+      "🔍 [EMBED QUERY] Calling embedding API with query:",
+      query.substring(0, 100) + "..."
+    );
+
+    // Gọi API route thay vì trực tiếp HF API
+    const response = await fetch("/api/embedding", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: query }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error("❌ [EMBED QUERY] API error:", response.status, errorData);
+      throw new Error(
+        `Embedding API error: ${response.status} - ${
+          errorData.error || "Unknown error"
+        }`
+      );
+    }
+
+    const data = await response.json();
+
+    if (!data.embedding || !Array.isArray(data.embedding)) {
+      console.error("❌ [EMBED QUERY] Invalid embedding response:", data);
+      throw new Error("Invalid embedding response format");
+    }
+
+    console.log(
+      "✅ [EMBED QUERY] Embedding received, length:",
+      data.embedding.length
+    );
+    return data.embedding;
+  } catch (error) {
+    console.error("❌ [EMBED QUERY] Error:", error);
+
+    // Fallback: return mock embedding for development
+    if (process.env.NODE_ENV === "development") {
+      console.log("🔧 [EMBED QUERY] Using fallback mock embedding");
       return Array(768)
         .fill(0)
         .map(() => Math.random() - 0.5);
     }
 
-    // Use the same model as specified in the environment variables
-    const modelName =
-      process.env.EMBEDDING_MODEL_NAME ||
-      "VoVanPhuc/sup-SimCSE-VietNamese-phobert-base";
-
-    // Get embedding from Hugging Face
-    const response = await hf.featureExtraction({
-      model: modelName,
-      inputs: query,
-    });
-
-    // If response is an array of arrays, take the first one
-    if (Array.isArray(response)) {
-      if (Array.isArray(response[0])) {
-        return response[0] as number[];
-      }
-      return response as number[];
-    }
-
-    throw new Error("Unexpected embedding response format");
-  } catch (error) {
-    console.error("Error embedding query:", error);
     throw new Error("Failed to embed query");
   }
 }
