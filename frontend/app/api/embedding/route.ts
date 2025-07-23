@@ -1,3 +1,4 @@
+"use client";
 import { type NextRequest, NextResponse } from "next/server";
 import { HfInference } from "@huggingface/inference";
 
